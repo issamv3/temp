@@ -12,7 +12,6 @@ function downloadVideo(url, outputPath) {
   const file = fs.createWriteStream(outputPath);
   
   https.get(url, (response) => {
-    // Follow redirects
     if (response.statusCode === 302 || response.statusCode === 301) {
       return downloadVideo(response.headers.location, outputPath);
     }
@@ -40,9 +39,7 @@ function downloadVideo(url, outputPath) {
     
   }).on('error', (err) => {
     console.error('خطأ في التحميل:', err.message);
-    fs.unlink(outputPath, () => {}); // Remove incomplete file
+    fs.unlink(outputPath, () => {});
   });
 }
-
-// Start download
 downloadVideo(videoUrl, outputPath);
