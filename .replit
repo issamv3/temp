@@ -12,3 +12,15 @@ channel = "stable-24_11"
 run = ["node", "index.js"]
 deploymentTarget = "autoscale"
 ignorePorts = false
+
+[workflows]
+runButton = "Download Video"
+
+[[workflows.workflow]]
+name = "Download Video"
+author = 41658685
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node index.js"
